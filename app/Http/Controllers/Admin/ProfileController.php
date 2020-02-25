@@ -13,7 +13,7 @@ class ProfileController extends Controller
         return view('admin.profile.create');
     }
     
-    public function reate()
+    public function create()
     {
         return redirect('admin/profile/create');
     }
@@ -30,6 +30,21 @@ class ProfileController extends Controller
     
      public function create(Request $request)
     {
+       $this->validate($request, Profile::$rules);
+
+        $news = new Profile;
+        $form = $request->all();
+        
+      
+
+      // フォームから送信されてきた_tokenを削除する
+      unset($form['_token']);
+     
+
+      // データベースに保存する
+      $news->fill($form);
+      $news->save();
+        
         return redirect('admin/profile/create');
     }
 }
