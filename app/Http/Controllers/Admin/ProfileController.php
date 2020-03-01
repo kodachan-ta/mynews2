@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Profile;
-use App\History2;
+use App\ProfileHistory;
 use Carbon\Carbon;
 
 class ProfileController extends Controller
@@ -23,12 +23,9 @@ class ProfileController extends Controller
         $profile = new Profile;
         $form = $request->all();
         
-      
-
         // フォームから送信されてきた_tokenを削除する
         unset($form['_token']);
      
-
         // データベースに保存する
         $profile->fill($form);
          $profile->save();
@@ -41,7 +38,7 @@ class ProfileController extends Controller
         //Profile Model から取得する
         $profile = Profile::find($request->id);
         if (empty($profile)) {
-        abort(404);    
+            abort(404);
         }
         return view('admin.profile.edit', ['profile_form' =>$profile]);
     }
@@ -51,17 +48,17 @@ class ProfileController extends Controller
         // Validationをかける
         $this->validate($request, Profile::$rules);
          // Profile Modelからデータを取得する
-         $profile = Profile::find($request->id);
+        $profile = Profile::find($request->id);
         // 送信されてきたフォームデータを格納する
         $profile_form = $request->all();
         unset($profile_form['_token']);
 
         // 該当するデータを上書きして保存する
-         $profile->fill($profile_form)->save();
-         
+        $profile->fill($profile_form)->save();
+        
          //以下を追記
-        $history = new History;
-        $history ->news_id = $news->id;
+        $history = new ProfileHistory;
+        $history->profile_id = $profile->id;
         $history->edited_at = Carbon::now();
         $history->save();
         
