@@ -8,7 +8,7 @@
         <title>MyNews</title>
     </head>
     <body>
-        <h1>Myニュース作成画面</h1>
+        <h1>Myニュース作成画面　デプロイテスト</h1>
         
         {{-- layouts/admin.blade.phpを読み込む --}}
         @extends('layouts.admin')
@@ -22,7 +22,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 mx-auto">
-                        <h2>ニュースの新規作成 デプロイテスト</h2>
+                        <h2>ニュースの新規作成</h2>
                         <form action="{{ action('Admin\NewsController@create') }}" method="post" enctype="multipart/form-data">
 
                             @if (count($errors) > 0)
