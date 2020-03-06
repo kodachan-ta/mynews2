@@ -1,5 +1,4 @@
 @extends('layouts.front')
-
 @section('content')
     <div class="container">
         <hr color="#c0c0c0">
