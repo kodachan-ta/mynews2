@@ -45,3 +45,6 @@ Route::group(['prefix' => 'admin'], function() {
     Route::post('news/create', 'Admin\NewsController@create')->middleware('auth');
     Route::get('news', 'Admin\NewsController@index')->middleware('auth'); // 追記
 });
+
+Route::get('/','NewsController@index');
+Route::get('/profile', 'ProfileController@index');
